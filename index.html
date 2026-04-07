@@ -8,11 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <!-- EmailJS CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init({
+              publicKey: "LCvqGZ-Ukd-F8LXN_",
+            });
+        })();
+    </script>
 </head>
 <body>
-    <!-- Scroll Progress -->
-    <div class="scroll-progress"></div>
-
     <!-- Floating Background Shapes -->
     <div class="floating-shapes">
         <div class="shape"></div>
@@ -60,13 +66,6 @@
                 <a href="#contact" class="btn btn-primary ripple-btn">Let's Talk</a>
                 <a href="#about" class="btn btn-outline ripple-btn">Discover More</a>
             </div>
-        </div>
-        
-        <!-- Bottom Curve -->
-        <div class="wave-divider bottom">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="var(--bg-white)"></path>
-            </svg>
         </div>
     </section>
 
@@ -130,12 +129,6 @@
 
     <!-- Services Grid section -->
     <section id="services" class="services section-padding bg-light relative">
-        <div class="wave-divider top">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="var(--bg-white)"></path>
-            </svg>
-        </div>
-        
         <div class="container">
             <div class="section-title reveal fade-up blur-reveal">
                 <span class="section-subtitle">Our Capabilities</span>
@@ -238,12 +231,6 @@
                 </div>
             </div>
         </div>
-        
-        <div class="wave-divider bottom">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="var(--primary-color)"></path>
-            </svg>
-        </div>
     </section>
 
     <!-- Specialization -->
@@ -269,12 +256,6 @@
                     <img src="assets/hospital.jpg" alt="Hospital Interior">
                 </div>
             </div>
-        </div>
-        
-        <div class="wave-divider bottom">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="var(--bg-light)"></path>
-            </svg>
         </div>
     </section>
 
@@ -316,28 +297,28 @@
                 </div>
                 
                 <div class="contact-form reveal fade-left blur-reveal delay-1">
-                    <form id="contactForm">
+                    <form id="contact-form">
                         <div class="form-group floating-group">
-                            <input type="text" id="name" class="floating-input" placeholder=" " required>
+                            <input type="text" id="name" name="name" class="floating-input" placeholder=" " required>
                             <label for="name" class="floating-label">Full Name</label>
                         </div>
                         <div class="form-group floating-group">
-                            <input type="email" id="email" class="floating-input" placeholder=" " required>
+                            <input type="email" id="email" name="email" class="floating-input" placeholder=" " required>
                             <label for="email" class="floating-label">Email Address</label>
                         </div>
                         <div class="form-group floating-group select-group">
-                            <select id="service" class="floating-input" required>
+                            <select id="subject" name="subject" class="floating-input" required>
                                 <option value="" disabled selected hidden></option>
                                 <option value="civil">Civil Construction</option>
                                 <option value="hospital">Hospital & Fire NOC</option>
                                 <option value="realestate">Real Estate Consultancy</option>
                                 <option value="other">Other Inquiry</option>
                             </select>
-                            <label for="service" class="floating-label select-label">Subject / Inquiry</label>
+                            <label for="subject" class="floating-label select-label">Subject / Inquiry</label>
                             <i class="fas fa-chevron-down select-arrow"></i>
                         </div>
                         <div class="form-group floating-group">
-                            <textarea id="message" rows="5" class="floating-input" placeholder=" " required></textarea>
+                            <textarea id="message" name="message" rows="5" class="floating-input" placeholder=" " required></textarea>
                             <label for="message" class="floating-label">Your Message</label>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block ripple-btn">Submit Inquiry</button>

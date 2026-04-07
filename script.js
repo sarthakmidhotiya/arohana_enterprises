@@ -30,13 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 400); // Quick fade out after load
     });
 
-    // 3. Scroll Progress Indicator
-    const scrollProgress = document.querySelector('.scroll-progress');
-    lenis.on('scroll', ({ scroll, limit }) => {
-        const progress = (scroll / limit) * 100;
-        scrollProgress.style.width = `${progress}%`;
-    });
-
     // 4. Mobile Menu Toggle
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
@@ -148,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 10. Form Submission Simulation (Floating labels handled in CSS)
-    const contactForm = document.getElementById('contactForm');
+    const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -158,19 +151,34 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.style.pointerEvents = 'none';
             
-            setTimeout(() => {
-                submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-                submitBtn.style.background = '#28a745'; // Success green
-                submitBtn.style.backgroundSize = '100%';
-                
-                contactForm.reset();
-                
-                setTimeout(() => {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.style.pointerEvents = 'auto';
-                    submitBtn.style.background = ''; // Restore original gradient
-                }, 3000);
-            }, 1500);
+            // Send form using EmailJS
+            emailjs.sendForm('SERVICE_ID', 'TEMPLATE_ID', contactForm)
+                .then(() => {
+                    alert('Message sent successfully!');
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                    submitBtn.style.background = '#28a745'; // Success green
+                    submitBtn.style.backgroundSize = '100%';
+                    
+                    contactForm.reset();
+                    
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.style.pointerEvents = 'auto';
+                        submitBtn.style.background = ''; // Restore original gradient
+                    }, 3000);
+                }, (error) => {
+                    alert('Failed to send the message. Please try again.');
+                    console.log('FAILED...', error);
+                    submitBtn.innerHTML = '<i class="fas fa-times"></i> Failed to Send';
+                    submitBtn.style.background = '#dc3545'; // Error red
+                    submitBtn.style.backgroundSize = '100%';
+                    
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.style.pointerEvents = 'auto';
+                        submitBtn.style.background = ''; // Restore original gradient
+                    }, 3000);
+                });
         });
     }
 });
